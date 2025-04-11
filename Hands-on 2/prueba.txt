@@ -1,0 +1,8 @@
+int x = 10;
+return x + 5;
+// Esto es un comentario
+/*
+Comentario de
+múltiples líneas
+*/
+"Hola, mundo"

@@ -1,0 +1,9 @@
+int numero = 42;
+return numero;
+// Esto es un comentario de una línea
+/*
+   Esto es un comentario
+   de múltiples líneas
+*/
+"Hola, mundo"
+x23 = 100;

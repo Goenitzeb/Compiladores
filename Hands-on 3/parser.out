@@ -1,0 +1,437 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> expr
+Rule 1     expr -> expr PLUS term
+Rule 2     expr -> expr MINUS term
+Rule 3     expr -> term
+Rule 4     term -> term TIMES factor
+Rule 5     term -> term DIVIDE factor
+Rule 6     term -> factor
+Rule 7     factor -> LPAREN expr RPAREN
+Rule 8     factor -> logical
+Rule 9     logical -> logical AND logical
+Rule 10    logical -> logical OR logical
+Rule 11    logical -> NOT logical
+Rule 12    logical -> BOOL
+Rule 13    logical -> NUMBER
+
+Terminals, with rules where they appear
+
+AND                  : 9
+BOOL                 : 12
+DIVIDE               : 5
+LPAREN               : 7
+MINUS                : 2
+NOT                  : 11
+NUMBER               : 13
+OR                   : 10
+PLUS                 : 1
+RPAREN               : 7
+TIMES                : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+expr                 : 1 2 7 0
+factor               : 4 5 6
+logical              : 8 9 9 10 10 11
+term                 : 1 2 3 4 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expr
+    (1) expr -> . expr PLUS term
+    (2) expr -> . expr MINUS term
+    (3) expr -> . term
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (7) factor -> . LPAREN expr RPAREN
+    (8) factor -> . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 1
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    logical                        shift and go to state 5
+
+state 1
+
+    (0) S' -> expr .
+    (1) expr -> expr . PLUS term
+    (2) expr -> expr . MINUS term
+
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+
+
+state 2
+
+    (3) expr -> term .
+    (4) term -> term . TIMES factor
+    (5) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 3 (expr -> term .)
+    MINUS           reduce using rule 3 (expr -> term .)
+    $end            reduce using rule 3 (expr -> term .)
+    RPAREN          reduce using rule 3 (expr -> term .)
+    TIMES           shift and go to state 11
+    DIVIDE          shift and go to state 12
+
+
+state 3
+
+    (6) term -> factor .
+
+    TIMES           reduce using rule 6 (term -> factor .)
+    DIVIDE          reduce using rule 6 (term -> factor .)
+    PLUS            reduce using rule 6 (term -> factor .)
+    MINUS           reduce using rule 6 (term -> factor .)
+    $end            reduce using rule 6 (term -> factor .)
+    RPAREN          reduce using rule 6 (term -> factor .)
+
+
+state 4
+
+    (7) factor -> LPAREN . expr RPAREN
+    (1) expr -> . expr PLUS term
+    (2) expr -> . expr MINUS term
+    (3) expr -> . term
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (7) factor -> . LPAREN expr RPAREN
+    (8) factor -> . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    expr                           shift and go to state 13
+    term                           shift and go to state 2
+    factor                         shift and go to state 3
+    logical                        shift and go to state 5
+
+state 5
+
+    (8) factor -> logical .
+    (9) logical -> logical . AND logical
+    (10) logical -> logical . OR logical
+
+    TIMES           reduce using rule 8 (factor -> logical .)
+    DIVIDE          reduce using rule 8 (factor -> logical .)
+    PLUS            reduce using rule 8 (factor -> logical .)
+    MINUS           reduce using rule 8 (factor -> logical .)
+    $end            reduce using rule 8 (factor -> logical .)
+    RPAREN          reduce using rule 8 (factor -> logical .)
+    AND             shift and go to state 14
+    OR              shift and go to state 15
+
+
+state 6
+
+    (11) logical -> NOT . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    logical                        shift and go to state 16
+
+state 7
+
+    (12) logical -> BOOL .
+
+    AND             reduce using rule 12 (logical -> BOOL .)
+    OR              reduce using rule 12 (logical -> BOOL .)
+    TIMES           reduce using rule 12 (logical -> BOOL .)
+    DIVIDE          reduce using rule 12 (logical -> BOOL .)
+    PLUS            reduce using rule 12 (logical -> BOOL .)
+    MINUS           reduce using rule 12 (logical -> BOOL .)
+    $end            reduce using rule 12 (logical -> BOOL .)
+    RPAREN          reduce using rule 12 (logical -> BOOL .)
+
+
+state 8
+
+    (13) logical -> NUMBER .
+
+    AND             reduce using rule 13 (logical -> NUMBER .)
+    OR              reduce using rule 13 (logical -> NUMBER .)
+    TIMES           reduce using rule 13 (logical -> NUMBER .)
+    DIVIDE          reduce using rule 13 (logical -> NUMBER .)
+    PLUS            reduce using rule 13 (logical -> NUMBER .)
+    MINUS           reduce using rule 13 (logical -> NUMBER .)
+    $end            reduce using rule 13 (logical -> NUMBER .)
+    RPAREN          reduce using rule 13 (logical -> NUMBER .)
+
+
+state 9
+
+    (1) expr -> expr PLUS . term
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (7) factor -> . LPAREN expr RPAREN
+    (8) factor -> . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    term                           shift and go to state 17
+    factor                         shift and go to state 3
+    logical                        shift and go to state 5
+
+state 10
+
+    (2) expr -> expr MINUS . term
+    (4) term -> . term TIMES factor
+    (5) term -> . term DIVIDE factor
+    (6) term -> . factor
+    (7) factor -> . LPAREN expr RPAREN
+    (8) factor -> . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    term                           shift and go to state 18
+    factor                         shift and go to state 3
+    logical                        shift and go to state 5
+
+state 11
+
+    (4) term -> term TIMES . factor
+    (7) factor -> . LPAREN expr RPAREN
+    (8) factor -> . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    factor                         shift and go to state 19
+    logical                        shift and go to state 5
+
+state 12
+
+    (5) term -> term DIVIDE . factor
+    (7) factor -> . LPAREN expr RPAREN
+    (8) factor -> . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    LPAREN          shift and go to state 4
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    factor                         shift and go to state 20
+    logical                        shift and go to state 5
+
+state 13
+
+    (7) factor -> LPAREN expr . RPAREN
+    (1) expr -> expr . PLUS term
+    (2) expr -> expr . MINUS term
+
+    RPAREN          shift and go to state 21
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+
+
+state 14
+
+    (9) logical -> logical AND . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    logical                        shift and go to state 22
+
+state 15
+
+    (10) logical -> logical OR . logical
+    (9) logical -> . logical AND logical
+    (10) logical -> . logical OR logical
+    (11) logical -> . NOT logical
+    (12) logical -> . BOOL
+    (13) logical -> . NUMBER
+
+    NOT             shift and go to state 6
+    BOOL            shift and go to state 7
+    NUMBER          shift and go to state 8
+
+    logical                        shift and go to state 23
+
+state 16
+
+    (11) logical -> NOT logical .
+    (9) logical -> logical . AND logical
+    (10) logical -> logical . OR logical
+
+    AND             reduce using rule 11 (logical -> NOT logical .)
+    OR              reduce using rule 11 (logical -> NOT logical .)
+    TIMES           reduce using rule 11 (logical -> NOT logical .)
+    DIVIDE          reduce using rule 11 (logical -> NOT logical .)
+    PLUS            reduce using rule 11 (logical -> NOT logical .)
+    MINUS           reduce using rule 11 (logical -> NOT logical .)
+    $end            reduce using rule 11 (logical -> NOT logical .)
+    RPAREN          reduce using rule 11 (logical -> NOT logical .)
+
+  ! AND             [ shift and go to state 14 ]
+  ! OR              [ shift and go to state 15 ]
+
+
+state 17
+
+    (1) expr -> expr PLUS term .
+    (4) term -> term . TIMES factor
+    (5) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 1 (expr -> expr PLUS term .)
+    MINUS           reduce using rule 1 (expr -> expr PLUS term .)
+    $end            reduce using rule 1 (expr -> expr PLUS term .)
+    RPAREN          reduce using rule 1 (expr -> expr PLUS term .)
+    TIMES           shift and go to state 11
+    DIVIDE          shift and go to state 12
+
+
+state 18
+
+    (2) expr -> expr MINUS term .
+    (4) term -> term . TIMES factor
+    (5) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 2 (expr -> expr MINUS term .)
+    MINUS           reduce using rule 2 (expr -> expr MINUS term .)
+    $end            reduce using rule 2 (expr -> expr MINUS term .)
+    RPAREN          reduce using rule 2 (expr -> expr MINUS term .)
+    TIMES           shift and go to state 11
+    DIVIDE          shift and go to state 12
+
+
+state 19
+
+    (4) term -> term TIMES factor .
+
+    TIMES           reduce using rule 4 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 4 (term -> term TIMES factor .)
+    PLUS            reduce using rule 4 (term -> term TIMES factor .)
+    MINUS           reduce using rule 4 (term -> term TIMES factor .)
+    $end            reduce using rule 4 (term -> term TIMES factor .)
+    RPAREN          reduce using rule 4 (term -> term TIMES factor .)
+
+
+state 20
+
+    (5) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 5 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 5 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 5 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 5 (term -> term DIVIDE factor .)
+    $end            reduce using rule 5 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 5 (term -> term DIVIDE factor .)
+
+
+state 21
+
+    (7) factor -> LPAREN expr RPAREN .
+
+    TIMES           reduce using rule 7 (factor -> LPAREN expr RPAREN .)
+    DIVIDE          reduce using rule 7 (factor -> LPAREN expr RPAREN .)
+    PLUS            reduce using rule 7 (factor -> LPAREN expr RPAREN .)
+    MINUS           reduce using rule 7 (factor -> LPAREN expr RPAREN .)
+    $end            reduce using rule 7 (factor -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 7 (factor -> LPAREN expr RPAREN .)
+
+
+state 22
+
+    (9) logical -> logical AND logical .
+    (9) logical -> logical . AND logical
+    (10) logical -> logical . OR logical
+
+    AND             reduce using rule 9 (logical -> logical AND logical .)
+    OR              reduce using rule 9 (logical -> logical AND logical .)
+    TIMES           reduce using rule 9 (logical -> logical AND logical .)
+    DIVIDE          reduce using rule 9 (logical -> logical AND logical .)
+    PLUS            reduce using rule 9 (logical -> logical AND logical .)
+    MINUS           reduce using rule 9 (logical -> logical AND logical .)
+    $end            reduce using rule 9 (logical -> logical AND logical .)
+    RPAREN          reduce using rule 9 (logical -> logical AND logical .)
+
+  ! AND             [ shift and go to state 14 ]
+  ! OR              [ shift and go to state 15 ]
+
+
+state 23
+
+    (10) logical -> logical OR logical .
+    (9) logical -> logical . AND logical
+    (10) logical -> logical . OR logical
+
+    OR              reduce using rule 10 (logical -> logical OR logical .)
+    TIMES           reduce using rule 10 (logical -> logical OR logical .)
+    DIVIDE          reduce using rule 10 (logical -> logical OR logical .)
+    PLUS            reduce using rule 10 (logical -> logical OR logical .)
+    MINUS           reduce using rule 10 (logical -> logical OR logical .)
+    $end            reduce using rule 10 (logical -> logical OR logical .)
+    RPAREN          reduce using rule 10 (logical -> logical OR logical .)
+    AND             shift and go to state 14
+
+  ! AND             [ reduce using rule 10 (logical -> logical OR logical .) ]
+  ! OR              [ shift and go to state 15 ]
+
